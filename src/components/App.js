@@ -8,6 +8,9 @@ console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
 function App() {
+  // function handleDeleteClick(key){
+  //   TASKS= TASKS.filter(task => !task.text === key)
+  // }
   return (
     <div className="App">
       <h2>My tasks</h2>
