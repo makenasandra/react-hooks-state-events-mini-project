@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
@@ -8,15 +8,29 @@ console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
 function App() {
-  // function handleDeleteClick(key){
-  //   TASKS= TASKS.filter(task => !task.text === key)
-  // }
+  const [tasksToDisplay, setTasksToDisplay] = useState(TASKS);
+
+  function handleCategoryClick(category) {
+    console.log(category);
+    setTasksToDisplay(TASKS.filter(task => {
+      if (category === "All") return true;
+      return task.category === category;
+    }
+    ));
+  }
+
+  function handleDeleteClick(text) {
+    console.log("delete", text);
+
+    setTasksToDisplay(tasksToDisplay.filter(task => !(task.text === text)));
+
+  }
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter />
+      <CategoryFilter categories={CATEGORIES} handleCategoryClick={handleCategoryClick} />
       <NewTaskForm />
-      <TaskList tasks={TASKS}/>
+      <TaskList tasks={tasksToDisplay} handleDeleteClick={handleDeleteClick} />
     </div>
   );
 }
