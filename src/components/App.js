@@ -25,11 +25,15 @@ function App() {
     setTasksToDisplay(tasksToDisplay.filter(task => !(task.text === text)));
 
   }
+  function onTaskFormSubmit (e){
+    console.log(e)
+    setTasksToDisplay([...tasksToDisplay, e]);
+  }
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter categories={CATEGORIES} handleCategoryClick={handleCategoryClick} />
-      <NewTaskForm />
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={onTaskFormSubmit }  />
       <TaskList tasks={tasksToDisplay} handleDeleteClick={handleDeleteClick} />
     </div>
   );
